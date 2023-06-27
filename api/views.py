@@ -20,7 +20,7 @@ def getData(request):
 def getConditions(request):
     conditions = Condition.objects.all()
     serializer = ConditionSerializer(conditions, many=True)
-    print(conditions)
+    print(serializer.data)
     return Response(serializer.data)
 
 
@@ -35,8 +35,10 @@ def addItem(request):
 @api_view(['POST'])
 def addCondition(request):
     serializer = ConditionSerializer(data=request.data)
-    if serializer.is_valid():
+    if serializer.is_valid(raise_exception=True):
         serializer.save()
+    else:
+        print("Not Valid!")
     return Response(serializer.data)
 
 @api_view(['POST'])
