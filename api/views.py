@@ -6,7 +6,6 @@ import json
 
 def calculate_bmi(weight, height):
     bmi = weight / (height ** 2)
-    print(bmi)
     return bmi
 
 @api_view(['GET'])
