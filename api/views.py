@@ -43,14 +43,30 @@ def addCondition(request):
 
 @api_view(['POST'])
 def getNutritionalAdvice(request):
-    data = json.loads(request.body)
-    print(data['weight'])
-    bmi = calculate_bmi(data['weight'], data['height'])
+    # data = json.loads(request.body)
+    bmi = calculate_bmi(request.data['weight'], request.data['height'])
     conditions = Condition.objects.all()
     serializer = ConditionSerializer(conditions, many=True)
     foundConditions = serializer.data
-    for condition in foundConditions:
-        if bmi is condition['bmi']:
-            return Response(condition['advice'])
+    print(bmi)
+    if bmi <= 18.5:
+        for condition in foundConditions:
+            print(condition.title)
+            if condition['title'] == "under weight":
+                return Response(condition['advice'])
+    elif bmi >= 18.5 and bmi < 25:
+        for condition in foundConditions:
+            if condition['title'] == "normal weight":
+                return Response(condition['advice'])
+    elif bmi >= 25 and bmi < 30:
+        for condition in foundConditions:
+            if condition['title'] == "over weight":
+                return Response(condition['advice'])
+    else:
+        for condition in foundConditions:
+            if condition['title'] == "obese":
+                return Response(condition['advice'])
+    return Response("error")
+
 
     
