@@ -39,9 +39,38 @@ def addCondition(request):
         print("Not Valid!")
     return Response(serializer.data)
 
+# ADD GOAL OBJECTIVES
+@api_view(['POST'])
+def addGoal(request):
+    resp = {}
+    goal = request.data['goal']
+    items = request.data['items'].split("-")
+    if goal == "bodybuilder":
+        for item in items:
+            new_item = {"item": item}
+            serializer = BodyBuilderGoalSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp = serializer.data
+    elif goal == "diabetic":
+        for item in items:
+            new_item = {"item": item}
+            serializer = DiabeticGoalSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp = serializer.data
+    elif goal == "expectant":
+        for item in items:
+            new_item = {"item": item}
+            serializer = ExpectantMotherSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp = serializer.data
+    return Response(resp)
+
+# CHECK NUTRITIONAL STATUS
 @api_view(['POST'])
 def getNutritionalAdvice(request):
-    # data = json.loads(request.body)
     bmi = calculate_bmi(request.data['weight'], request.data['height'])
     conditions = Condition.objects.all()
     serializer = ConditionSerializer(conditions, many=True)

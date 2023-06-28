@@ -19,7 +19,7 @@ class BodyBuilderGoal(models.Model):
 class DiabeticGoal(models.Model):
     item = models.TextField()
 
-class BodyExpectantMotherGoal(models.Model):
+class ExpectantMotherGoal(models.Model):
     item = models.TextField()
 
 

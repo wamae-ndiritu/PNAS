@@ -17,12 +17,12 @@ class BodyBuilderGoalSerializer(serializers.ModelSerializer):
         model = BodyBuilderGoal
         fields = '__all__'
 
-class BodyDiabeticGoalSerializer(serializers.ModelSerializer):
+class DiabeticGoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = DiabeticGoal
         fields = '__all__'
 
-class BodyExpectantMotherSerializer(serializers.ModelSerializer):
+class ExpectantMotherSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BodyExpectantMotherGoal
+        model = ExpectantMotherGoal
         fields = '__all__'
