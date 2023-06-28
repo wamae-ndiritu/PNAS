@@ -1,13 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.wrapper {
+  width: 100%;
+  background-color: #bee;
+  height: 70vh;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+  position: relative;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left .img {
+  width: 400px;
+}
+
+.img img {
+  width: 100%;
+}
+
+.right {
+  flex: 2;
+  padding: 30px;
+}
+
+.title {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+}
+
+.description {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  color: #666666;
+  margin-top: 20px;
+}
+
+.main {
+  width: 50%;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 9;
+  margin-top: -50px;
+  right: 0;
+  left: 0;
+  padding: 40px;
+}
+
+.form {
+  margin-top: 30px;
+}
+
+.form-row {
+  display: flex;
+}
+
+.form-row .column {
+  flex: 1;
+}
+
+.form-row .column-1 {
+  width: 200px;
+}
+
+.column .form-control {
+  width: 90% !important;
+}
+
+.column h6 {
+  margin-bottom: 10px;
+}
+
+.btn-main {
+  background-color: #bee;
+  color: #000;
+  border: none;
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
