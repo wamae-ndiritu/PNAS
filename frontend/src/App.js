@@ -1,9 +1,10 @@
 import { useState } from "react";
 import Modal from "./modal/Modal";
+import axios from "axios";
 
 function App() {
   const [isFemale, setIsFemale] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleGender = () => {
     setIsFemale(true);
@@ -11,6 +12,12 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    axios
+      .get("http://127.0.0.1:8000/")
+      .then((resp) => {
+        console.log({ data });
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="cont">
