@@ -90,7 +90,11 @@ def getGoalObjectives(request):
 # CHECK NUTRITIONAL STATUS
 @api_view(['POST'])
 def getNutritionalAdvice(request):
-    bmi = calculate_bmi(request.data['weight'], request.data['height'])
+    print(request.data)
+    result = {}
+    height = float(request.data['height'])
+    weight = float(request.data['weight'])
+    bmi = calculate_bmi(weight, height)
     conditions = Condition.objects.all()
     serializer = ConditionSerializer(conditions, many=True)
     foundConditions = serializer.data
