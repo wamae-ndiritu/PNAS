@@ -7,5 +7,6 @@ urlpatterns = [
     path('add/condition/', views.addCondition),
     path('add/goal/', views.addGoal),
     path('conditions/', views.getConditions),
+    path('objectives/', views.getGoalObjectives),
     path('nutritional-advice/', views.getNutritionalAdvice)
 ]

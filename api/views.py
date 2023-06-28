@@ -68,6 +68,25 @@ def addGoal(request):
                 resp = serializer.data
     return Response(resp)
 
+# GET OBJECTIVES BASED ON A GOAL
+@api_view(['POST'])
+def getGoalObjectives(request):
+    items = []
+    serializer = []
+    goal = request.data['goal']
+
+    if goal == "bodybuilder":
+        items = BodyBuilderGoal.objects.all()
+        serializer = BodyBuilderGoalSerializer(items, many=True)
+    elif goal == "diabetic":
+        items = DiabeticGoal.objects.all()
+        serializer = DiabeticGoalSerializer(items, many=True)
+    elif goal == "expectant":
+        items = ExpectantMotherGoal.objects.all()
+        serializer = ExpectantMotherSerializer(items, many=True)
+    print(serializer.data)
+    return Response(serializer.data)
+
 # CHECK NUTRITIONAL STATUS
 @api_view(['POST'])
 def getNutritionalAdvice(request):
