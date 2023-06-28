@@ -12,7 +12,17 @@ class ConditionSerializer(serializers.ModelSerializer):
         model = Condition
         fields = '__all__'
 
-class GoalSerializer(serializers.ModelSerializer):
+class BodyBuilderGoalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Goal
+        model = BodyBuilderGoal
+        fields = '__all__'
+
+class BodyDiabeticGoalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DiabeticGoal
+        fields = '__all__'
+
+class BodyExpectantMotherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BodyExpectantMotherGoal
         fields = '__all__'

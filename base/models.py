@@ -13,6 +13,14 @@ class Condition(models.Model):
     bmi = models.IntegerField()
     advice = models.TextField()
 
-class Goal(models.Model):
-    title = models.CharField(max_length=200)
-    advice = models.TextField()
+class BodyBuilderGoal(models.Model):
+    item = models.TextField()
+
+class DiabeticGoal(models.Model):
+    item = models.TextField()
+
+class BodyExpectantMotherGoal(models.Model):
+    item = models.TextField()
+
+
+

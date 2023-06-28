@@ -30,7 +30,6 @@ def addItem(request):
         serializer.save()
     return Response(serializer.data)
 
-
 @api_view(['POST'])
 def addCondition(request):
     serializer = ConditionSerializer(data=request.data)
@@ -56,6 +55,7 @@ def getNutritionalAdvice(request):
     elif bmi >= 18.5 and bmi < 25:
         for condition in foundConditions:
             if condition['title'] == "normal weight":
+                print(condition['title'])
                 return Response(condition['advice'])
     elif bmi >= 25 and bmi < 30:
         for condition in foundConditions:
