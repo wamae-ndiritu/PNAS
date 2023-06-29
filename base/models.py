@@ -11,7 +11,21 @@ class Item(models.Model):
 class Condition(models.Model):
     title = models.CharField(max_length=200)
     bmi = models.IntegerField()
-    advice = models.TextField()
+    comment = models.TextField()
+
+
+class NormalWeightItems(models.Model):
+    item = models.TextField()
+
+class UnderWeightItems(models.Model):
+    item = models.TextField()
+
+class OverWeightItems(models.Model):
+    item = models.TextField()
+
+class ObeseItems(models.Model):
+    item = models.TextField()
+
 
 class BodyBuilderGoal(models.Model):
     item = models.TextField()

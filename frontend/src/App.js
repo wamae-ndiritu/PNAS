@@ -4,7 +4,7 @@ import axios from "axios";
 
 function App() {
   const [isFemale, setIsFemale] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [details, setDetails] = useState({ height: "", weight: "", age: "" });
   const [goals, setGoals] = useState([]);
 

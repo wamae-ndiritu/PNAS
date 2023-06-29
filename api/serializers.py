@@ -26,3 +26,25 @@ class ExpectantMotherSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExpectantMotherGoal
         fields = '__all__'
+
+
+class NormalWeightItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NormalWeightItems
+        fields = '__all__'
+
+
+class UnderWeightItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UnderWeightItems
+        fields = '__all__'
+
+class OverWeightItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OverWeightItems
+        fields = '__all__'
+
+class ObeseItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ObeseItems
+        fields = '__all__'

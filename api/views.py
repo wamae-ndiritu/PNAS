@@ -103,6 +103,8 @@ def getNutritionalAdvice(request):
         for condition in foundConditions:
             print(condition.title)
             if condition['title'] == "under weight":
+                result['status'] = condition['title']
+                # result['advice'] = 
                 return Response(condition['advice'])
     elif bmi >= 18.5 and bmi < 25:
         for condition in foundConditions:
