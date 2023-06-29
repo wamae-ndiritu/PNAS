@@ -1,42 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "./Modal.css"; // Import your modal styles
+import { useGlobalContext } from "../context";
 
-function Modal({ isModalOpen }) {
-  const [modalOpen, setModalOpen] = useState(isModalOpen);
+function Modal() {
+  const { item, isModalOpen, closeModal } = useGlobalContext();
 
-  const closeModal = () => {
-    setModalOpen(false);
+  const handleCloseModal = () => {
+    closeModal();
     document.body.style.overflow = "auto"; // Allow scrolling on the body
   };
 
-  useEffect(() => {
-    if (modalOpen) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling on the body
-    }
-  });
+  console.log(item);
 
   return (
     <div>
-      {modalOpen && (
+      {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h4>Nutritional Advice</h4>
-            <h5>Weight Status: Normal Weight</h5>
-            <p className="alert alert-success">
-              You have a healthy weight. Maintain a balanced diet and exercise
-              regularly.
+            <h5>Weight Status: {item.status}</h5>
+            <p
+              className={
+                item.status === "normal weight"
+                  ? `alert alert-success`
+                  : `alert alert-warning`
+              }
+            >
+              {item.comment}
             </p>
             <h6>Foods to include:</h6>
             <ul>
-              <li>
-                Whole grains (e.g., quinoa, brown rice, whole wheat bread)
-              </li>
-              <li>Lean proteins (e.g., chicken, fish, beans)</li>
-              <li>Healthy fats (e.g., avocado, nuts, seeds)</li>
-              <li>Dairy or dairy alternatives (e.g., milk, yogurt, tofu)</li>
-              <li>Colorful fruits and vegetables</li>
+              {item.items.map((newItem) => {
+                const { id, item } = newItem;
+                return <li key={id}>{item}</li>;
+              })}
             </ul>
-            <button onClick={closeModal}>Close Modal</button>
+            {item.goalItems.map((goalItem) => {
+              const { id, title, items } = goalItem;
+              return (
+                <div key={id}>
+                  <h6>Foods for {title}:</h6>
+                  <ul>
+                    {items.map((newItem) => {
+                      const { id, item } = newItem;
+                      return <li key={id}>{item}</li>;
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
+            <button onClick={handleCloseModal}>Close Modal</button>
           </div>
         </div>
       )}

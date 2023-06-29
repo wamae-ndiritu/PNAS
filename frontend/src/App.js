@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Modal from "./modal/Modal";
 import axios from "axios";
+import { useGlobalContext } from "./context";
 
 function App() {
   const [isFemale, setIsFemale] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const [details, setDetails] = useState({ height: "", weight: "", age: "" });
   const [goals, setGoals] = useState([]);
+
+  const { getAdviceSuccess } = useGlobalContext();
 
   const handleGender = () => {
     setIsFemale(true);
@@ -26,18 +28,20 @@ function App() {
     }
   };
 
+  console.log(goals);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://127.0.0.1:8000/nutritional-advice/", { ...details, goals })
       .then(({ data }) => {
-        console.log(data);
+        getAdviceSuccess(data);
       })
       .catch((err) => console.log(err));
   };
   return (
     <div className="cont">
-      <Modal isModalOpen={isModalOpen} />
+      <Modal />
       <div className="wrapper">
         <div className="left">
           <div className="img">
