@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.getData),
     path('add/', views.addItem),
     path('add/condition/', views.addCondition),
+    path('conditions/delete/', views.deleteConditions),
     path('add/goal/', views.addGoal),
     path('conditions/', views.getConditions),
     path('objectives/', views.getGoalObjectives),

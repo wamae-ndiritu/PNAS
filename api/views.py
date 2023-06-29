@@ -32,12 +32,53 @@ def addItem(request):
 
 @api_view(['POST'])
 def addCondition(request):
-    serializer = ConditionSerializer(data=request.data)
+    resp = {}
+    title = request.data['title']
+    items = request.data['items'].split("-")
+    new_condition = {}
+    new_condition['title'] = request.data['title']
+    new_condition['bmi'] = request.data['bmi']
+    new_condition['comment'] = request.data['comment']
+    serializer = ConditionSerializer(data=new_condition)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
-    else:
-        print("Not Valid!")
-    return Response(serializer.data)
+        resp['title'] = serializer.data['title']
+        resp['bmi'] = serializer.data['bmi']
+        resp['comment'] = serializer.data['comment']
+    if title == "under weight":
+        for item in items:
+            new_item = {"item": item}
+            serializer = UnderWeightItemsSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp['item'] = serializer.data['item']
+    elif title == "normal weight":
+        for item in items:
+            new_item = {"item": item}
+            serializer = NormalWeightItemsSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp['item'] = serializer.data['item']
+    elif title == "over weight":
+        for item in items:
+            new_item = {"item": item}
+            serializer = OverWeightItemsSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp['item'] = serializer.data['item']
+    elif title == "obese":
+        for item in items:
+            new_item = {"item": item}
+            serializer = ObeseItemsSerializer(data=new_item)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                resp['item'] = serializer.data['item']
+    return Response(resp)
+
+@api_view(['DELETE'])
+def deleteConditions(request):
+    Condition.objects.all().delete()
+    return Response("All conditions deleted!")
 
 # ADD GOAL OBJECTIVES
 @api_view(['POST'])
