@@ -132,9 +132,10 @@ def getGoalObjectives(request):
 @api_view(['POST'])
 def getNutritionalAdvice(request):
     print(request.data)
-    result = {}
+    result = {"goalItems": []}
     height = float(request.data['height'])
     weight = float(request.data['weight'])
+    goals = request.data['goals']
     bmi = calculate_bmi(weight, height)
     conditions = Condition.objects.all()
     serializer = ConditionSerializer(conditions, many=True)
@@ -172,6 +173,29 @@ def getNutritionalAdvice(request):
                 result['status'] = condition['title']
                 result['comment'] = condition['comment']
                 result['items'] = serializer.data
+    if goals:
+        goalItem = {}
+        for goal in goals:
+            if goal == "bodybuilder":
+                print(goal)
+                items = BodyBuilderGoal.objects.all()
+                serializer = BodyBuilderGoalSerializer(items, many=True)
+                goalItem['title'] = "bodybuilder"
+                goalItem['items'] = serializer.data
+                result['goalItems'].append(goalItem)
+            elif goal == "diabetic":
+                items = DiabeticGoal.objects.all()
+                serializer = DiabeticGoalSerializer(items, many=True)
+                goalItem['title'] = "diabetic"
+                goalItem['items'] = serializer.data
+                result['goalItems'].append(goalItem)
+            elif goal == "expectant":
+                items = ExpectantMotherGoal.objects.all()
+                serializer = ExpectantMotherSerializer(items, many=True)
+                goalItem['title'] = "expectant"
+                goalItem['items'] = serializer.data
+                result['goalItems'].append(goalItem)
+
     return Response(result)
 
 
