@@ -142,25 +142,37 @@ def getNutritionalAdvice(request):
     print(bmi)
     if bmi <= 18.5:
         for condition in foundConditions:
-            print(condition.title)
             if condition['title'] == "under weight":
+                items = UnderWeightItems.objects.all()
+                serializer = UnderWeightItemsSerializer(items, many=True)
                 result['status'] = condition['title']
-                # result['advice'] = 
-                return Response(condition['advice'])
+                result['comment'] = condition['comment']
+                result['items'] = serializer.data
     elif bmi >= 18.5 and bmi < 25:
         for condition in foundConditions:
             if condition['title'] == "normal weight":
-                print(condition['title'])
-                return Response(condition['advice'])
+                items = NormalWeightItems.objects.all()
+                serializer = NormalWeightItemsSerializer(items, many=True)
+                result['status'] = condition['title']
+                result['comment'] = condition['comment']
+                result['items'] = serializer.data
     elif bmi >= 25 and bmi < 30:
         for condition in foundConditions:
             if condition['title'] == "over weight":
-                return Response(condition['advice'])
+                items = OverWeightItems.objects.all()
+                serializer = OverWeightItemsSerializer(items, many=True)
+                result['status'] = condition['title']
+                result['comment'] = condition['comment']
+                result['items'] = serializer.data
     else:
         for condition in foundConditions:
             if condition['title'] == "obese":
-                return Response(condition['advice'])
-    return Response("error")
+                items = ObeseItemsSerializer.objects.all()
+                serializer = ObeseItemsSerializer(items, many=True)
+                result['status'] = condition['title']
+                result['comment'] = condition['comment']
+                result['items'] = serializer.data
+    return Response(result)
 
 
     
